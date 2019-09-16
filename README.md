@@ -1,6 +1,8 @@
 ESLint-plugin-theme-helpers
 ===================
 
+[![Build Status](https://travis-ci.com/juancfh/eslint-plugin-theme-helpers.svg?branch=master)](https://travis-ci.com/juancfh/eslint-plugin-theme-helpers)
+
 # Description
 
 There are some helpers which retrieve theme params (color, fonts, sizes...). The plugin ensure that arguments passed through these helpers exist in current theme.
