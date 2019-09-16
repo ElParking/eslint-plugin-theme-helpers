@@ -15,6 +15,10 @@ ruleTester.run('no-unknown-theme-color', rule, {
       code: 'themeColor(colorName);',
       options: [{colors: fakeColors}]
     },
+    {
+      code: 'themeColor(colorName);',
+      options: []
+    },
   ],
   invalid: [
     {

@@ -15,6 +15,10 @@ ruleTester.run('no-unknown-theme-color', rule, {
       code: 'themeFontSize(fontSize);',
       options: [{fontSizes: fakeFontSizes}]
     },
+    {
+      code: 'themeFontSize(fontSize);',
+      options: []
+    },
   ],
   invalid: [
     {
