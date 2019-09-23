@@ -421,13 +421,13 @@ ruleTester.run('jsx-no-literals', rule, {
       }`,
       output: `class CompWithFixFn extends Component {
         render() {
-          return <div bar="foo"><DMess df="asdf" /></div>
+          return <div bar="foo"><FormmatedMessage default="asdf" /></div>
         }
       }`,
       options: [
         {
           noStrings: true,
-          prefix: '<DMess df="',
+          prefix: '<FormmatedMessage default="',
           sufix: '" />',
         }
       ],
@@ -440,7 +440,7 @@ ruleTester.run('jsx-no-literals', rule, {
       options: [
         {
           noStrings: true,
-          prefix: '<DMess df="',
+          prefix: '<FormmatedMessage default="',
           sufix: '" />',
         }
       ],
@@ -450,16 +450,44 @@ ruleTester.run('jsx-no-literals', rule, {
       ]
     }, {
       code: `<Foo bar={'foo'} />`,
-      output: `<Foo bar={<DMess df="foo" />} />`,
+      output: `<Foo bar={<FormmatedMessage default="foo" />} />`,
       options: [
         {
           noStrings: true,
-          prefix: '<DMess df="',
+          prefix: '<FormmatedMessage default="',
           sufix: '" />',
         }
       ],
       errors: [
         {message: stringsMessage(`'foo'`)},
+      ]
+    }, {
+      code: `<Foo label="foo" />`,
+      output: `<Foo label={<FormmatedMessage default="foo" />} />`,
+      options: [
+        {
+          noStrings: true,
+          prefix: '<FormmatedMessage default="',
+          sufix: '" />',
+        }
+      ],
+      errors: [
+        {message: stringsMessage(`'foo'`)},
+      ]
+    }, {
+      code: `<div>uno {one} dos {two} tres {three}</div>`,
+      output: `<div><FormmatedMessage default="uno /> {one} <FormmatedMessage default="dos" /> {two} <FormmatedMessage default="tres" /> {three}</div>`,
+      options: [
+        {
+          noStrings: true,
+          prefix: '<FormmatedMessage default="',
+          sufix: '" />',
+        }
+      ],
+      errors: [
+        {message: stringsMessage(`uno`)},
+        {message: stringsMessage(`dos`)},
+        {message: stringsMessage(`tres`)},
       ]
     }]
 });
