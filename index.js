@@ -9,9 +9,6 @@ module.exports = {
   rules: allRules,
   configs: {
     recommended: {
-      plugins: [
-        'react'
-      ],
       parserOptions: {
         ecmaFeatures: {
           jsx: true

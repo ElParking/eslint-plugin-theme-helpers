@@ -421,13 +421,13 @@ ruleTester.run('jsx-no-literals', rule, {
       }`,
       output: `class CompWithFixFn extends Component {
         render() {
-          return <div bar="foo"><FormmatedMessage default="asdf" /></div>
+          return <div bar="foo"><FormattedMessage default="asdf" /></div>
         }
       }`,
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
         }
       ],
@@ -440,7 +440,7 @@ ruleTester.run('jsx-no-literals', rule, {
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
         }
       ],
@@ -450,11 +450,11 @@ ruleTester.run('jsx-no-literals', rule, {
       ]
     }, {
       code: `<Foo bar={'foo'} />`,
-      output: `<Foo bar={<FormmatedMessage default="foo" />} />`,
+      output: `<Foo bar={<FormattedMessage default="foo" />} />`,
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
         }
       ],
@@ -463,11 +463,11 @@ ruleTester.run('jsx-no-literals', rule, {
       ]
     }, {
       code: `<Foo label="foo" other="pepe" />`,
-      output: `<Foo label={<FormmatedMessage default="foo" />} other="pepe" />`,
+      output: `<Foo label={<FormattedMessage default="foo" />} other="pepe" />`,
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
           warningAttributes: ['label']
         }
@@ -477,11 +477,11 @@ ruleTester.run('jsx-no-literals', rule, {
       ]
     }, {
       code: `<div>uno {one} dos {two} tres {three}</div>`,
-      output: `<div><FormmatedMessage default="uno " />{one}<FormmatedMessage default=" dos " />{two}<FormmatedMessage default=" tres " />{three}</div>`,
+      output: `<div><FormattedMessage default="uno " />{one}<FormattedMessage default=" dos " />{two}<FormattedMessage default=" tres " />{three}</div>`,
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
         }
       ],
@@ -492,11 +492,11 @@ ruleTester.run('jsx-no-literals', rule, {
       ]
     }, {
       code: `searchFn(3, 'ErrText1', 'ErrText2'); anoterFn('Other Text')`,
-      output: `searchFn(3, <FormmatedMessage default="ErrText1" />, <FormmatedMessage default="ErrText2" />); anoterFn('Other Text')`,
+      output: `searchFn(3, <FormattedMessage default="ErrText1" />, <FormattedMessage default="ErrText2" />); anoterFn('Other Text')`,
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
           warningFunctions: [
             {
@@ -512,11 +512,11 @@ ruleTester.run('jsx-no-literals', rule, {
       ]
     }, {
       code: `this.props.searchFnOnProps(3, 'ErrText1')`,
-      output: `this.props.searchFnOnProps(3, <FormmatedMessage default="ErrText1" />)`,
+      output: `this.props.searchFnOnProps(3, <FormattedMessage default="ErrText1" />)`,
       options: [
         {
           noStrings: true,
-          prefix: '<FormmatedMessage default="',
+          prefix: '<FormattedMessage default="',
           sufix: '" />',
           warningFunctions: [
             {
