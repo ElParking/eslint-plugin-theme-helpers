@@ -1,8 +1,6 @@
 const RuleTester = require('eslint').RuleTester;
 const rule = require('../../../lib/rules/jsx-no-literals');
 
-const parsers = require('../../helpers/parsers');
-
 const parserOptions = {
   ecmaVersion: 2018,
   sourceType: 'module',
@@ -38,7 +36,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         class Comp1 extends Component {
@@ -51,7 +48,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         class Comp1 extends Component {
@@ -60,7 +56,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         class Comp1 extends Component {
@@ -70,7 +65,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         var Hello = createReactClass({
@@ -80,7 +74,6 @@ ruleTester.run('jsx-no-literals', rule, {
           },
         });
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         class Comp1 extends Component {
@@ -95,7 +88,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         class Comp1 extends Component {
@@ -107,26 +99,22 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         var foo = require('foo');
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         <Foo bar='test'>
           {'blarg'}
         </Foo>
       `,
-      parser: parsers.BABEL_ESLINT
     }, {
       code: `
         <Foo bar="test">
           {intl.formatText(message)}
         </Foo>
       `,
-      parser: parsers.BABEL_ESLINT,
       options: [{noStrings: true}]
     }, {
       code: `
@@ -134,7 +122,6 @@ ruleTester.run('jsx-no-literals', rule, {
           {translate('my.translate.key')}
         </Foo>
       `,
-      parser: parsers.BABEL_ESLINT,
       options: [{noStrings: true}]
     }, {
       code: `
@@ -226,7 +213,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('test')}]
     }, {
       code: `
@@ -236,7 +222,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('test')}]
     }, {
       code: `
@@ -247,7 +232,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('test')}]
     }, {
       code: `
@@ -258,7 +242,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('test')}]
     }, {
       code: `
@@ -269,7 +252,6 @@ ruleTester.run('jsx-no-literals', rule, {
           },
         });
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('hello')}]
     }, {
       code: `
@@ -283,7 +265,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('asdjfl')}]
     }, {
       code: `
@@ -299,7 +280,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('asdjfl\n                test\n                foo')}]
     }, {
       code: `
@@ -315,7 +295,6 @@ ruleTester.run('jsx-no-literals', rule, {
           }
         }
       `,
-      parser: parsers.BABEL_ESLINT,
       errors: [{message: jsxMessage('test')}]
     }, {
       code: `
@@ -323,7 +302,6 @@ ruleTester.run('jsx-no-literals', rule, {
           {'Test'}
         </Foo>
       `,
-      parser: parsers.BABEL_ESLINT,
       options: [{noStrings: true}],
       errors: [{message: stringsMessage('\'Test\'')}]
     }, {
@@ -348,7 +326,6 @@ ruleTester.run('jsx-no-literals', rule, {
           Test
         </Foo>
       `,
-      parser: parsers.BABEL_ESLINT,
       options: [{noStrings: true}],
       errors: [{message: stringsMessage('Test')}]
     }, {
