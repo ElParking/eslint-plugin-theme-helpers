@@ -8,13 +8,6 @@ const allRules = {
 module.exports = {
   rules: allRules,
   configs: {
-    recommended: {
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true
-        }
-      },
-    },
     all: {
       plugins: ['theme-helpers'],
       rules: {
