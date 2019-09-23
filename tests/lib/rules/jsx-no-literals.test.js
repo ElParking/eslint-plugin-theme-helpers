@@ -462,21 +462,22 @@ ruleTester.run('jsx-no-literals', rule, {
         {message: stringsMessage(`'foo'`)},
       ]
     }, {
-      code: `<Foo label="foo" />`,
-      output: `<Foo label={<FormmatedMessage default="foo" />} />`,
+      code: `<Foo label="foo" other="pepe" />`,
+      output: `<Foo label={<FormmatedMessage default="foo" />} other="pepe" />`,
       options: [
         {
           noStrings: true,
           prefix: '<FormmatedMessage default="',
           sufix: '" />',
+          warningAttributes: ['label']
         }
       ],
       errors: [
-        {message: stringsMessage(`'foo'`)},
+        {message: stringsMessage(`"foo"`)},
       ]
     }, {
       code: `<div>uno {one} dos {two} tres {three}</div>`,
-      output: `<div><FormmatedMessage default="uno /> {one} <FormmatedMessage default="dos" /> {two} <FormmatedMessage default="tres" /> {three}</div>`,
+      output: `<div><FormmatedMessage default="uno " />{one}<FormmatedMessage default=" dos " />{two}<FormmatedMessage default=" tres " />{three}</div>`,
       options: [
         {
           noStrings: true,
@@ -488,6 +489,27 @@ ruleTester.run('jsx-no-literals', rule, {
         {message: stringsMessage(`uno`)},
         {message: stringsMessage(`dos`)},
         {message: stringsMessage(`tres`)},
+      ]
+    }, 
+    {
+      code: `searchFn(3, 'ErrText1', 'ErrText2'); anoterFn('Other Text')`,
+      output: `searchFn(3, <FormmatedMessage default="ErrText1" />, <FormmatedMessage default="ErrText2" />); anoterFn('Other Text')`,
+      options: [
+        {
+          noStrings: true,
+          prefix: '<FormmatedMessage default="',
+          sufix: '" />',
+          warningFunctions: [
+            {
+              name: 'searchFn',
+              arguments: [2, 3]
+            }
+          ]
+        }
+      ],
+      errors: [
+        {message: stringsMessage(`'ErrText1'`)},
+        {message: stringsMessage(`'ErrText2'`)},
       ]
     }]
 });
