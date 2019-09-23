@@ -490,8 +490,7 @@ ruleTester.run('jsx-no-literals', rule, {
         {message: stringsMessage(`dos`)},
         {message: stringsMessage(`tres`)},
       ]
-    }, 
-    {
+    }, {
       code: `searchFn(3, 'ErrText1', 'ErrText2'); anoterFn('Other Text')`,
       output: `searchFn(3, <FormmatedMessage default="ErrText1" />, <FormmatedMessage default="ErrText2" />); anoterFn('Other Text')`,
       options: [
@@ -510,6 +509,25 @@ ruleTester.run('jsx-no-literals', rule, {
       errors: [
         {message: stringsMessage(`'ErrText1'`)},
         {message: stringsMessage(`'ErrText2'`)},
+      ]
+    }, {
+      code: `this.props.searchFnOnProps(3, 'ErrText1')`,
+      output: `this.props.searchFnOnProps(3, <FormmatedMessage default="ErrText1" />)`,
+      options: [
+        {
+          noStrings: true,
+          prefix: '<FormmatedMessage default="',
+          sufix: '" />',
+          warningFunctions: [
+            {
+              name: 'searchFnOnProps',
+              arguments: [2]
+            }
+          ]
+        }
+      ],
+      errors: [
+        {message: stringsMessage(`'ErrText1'`)},
       ]
     }]
 });
