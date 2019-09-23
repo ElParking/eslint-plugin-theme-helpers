@@ -25,7 +25,6 @@ function jsxMessage(str) {
 
 const ruleTester = new RuleTester({parserOptions});
 ruleTester.run('jsx-no-literals', rule, {
-
   valid: [
     {
       code: `
@@ -414,6 +413,53 @@ ruleTester.run('jsx-no-literals', rule, {
         {message: stringsMessage('\'foo\'')},
         {message: stringsMessage('asdf')}
       ]
-    }
-  ]
+    }, {
+      code: `class CompWithFixFn extends Component {
+        render() {
+          return <div bar="foo">asdf</div>
+        }
+      }`,
+      output: `class CompWithFixFn extends Component {
+        render() {
+          return <div bar="foo"><DMess df="asdf" /></div>
+        }
+      }`,
+      options: [
+        {
+          noStrings: true,
+          prefix: '<DMess df="',
+          sufix: '" />',
+        }
+      ],
+      errors: [
+        {message: stringsMessage('asdf')}
+      ]
+    }, {
+      code: '<Foo bar={`foo` + `bar`} />',
+      output: '<Foo bar={`foo` + `bar`} />',
+      options: [
+        {
+          noStrings: true,
+          prefix: '<DMess df="',
+          sufix: '" />',
+        }
+      ],
+      errors: [
+        {message: stringsMessage('`foo`')},
+        {message: stringsMessage('`bar`')}
+      ]
+    }, {
+      code: `<Foo bar={'foo'} />`,
+      output: `<Foo bar={<DMess df="foo" />} />`,
+      options: [
+        {
+          noStrings: true,
+          prefix: '<DMess df="',
+          sufix: '" />',
+        }
+      ],
+      errors: [
+        {message: stringsMessage(`'foo'`)},
+      ]
+    }]
 });
